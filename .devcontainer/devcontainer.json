@@ -35,7 +35,8 @@
                 "files.trimTrailingWhitespace": true,
                 "editor.tabSize": 4,
                 // "python.defaultInterpreterPath": "/home/vscode/.venv/bin/python",
-                "files.autoSave": "onWindowChange"
+                "files.autoSave": "onWindowChange",
+                "chat.customAgentInSubagent.enabled": true
             },
             "extensions": [
                 "GitHub.vscode-github-actions",
