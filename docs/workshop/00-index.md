@@ -112,29 +112,22 @@ git --version
 gh --version
 ```
 
-### Ubuntu/Debian Quick Setup
+### Ubuntu/Debian Quick Setup (example)
 
 If you're missing prerequisites (e.g., in a fresh Docker container):
 
 ```bash
-# Update package list
-apt-get update
+# Basic tools
+apt-get update && apt-get install -y curl git jq gh
 
-# Install basic tools
-apt-get install -y curl git jq
+# Install uv (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.local/bin/env
 
-# Install Node.js 22.x
-curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-apt-get install -y nodejs
-
-# Verify installation
-node --version   # Should show v22.x.x
-npm --version    # Should show v10.x.x
-
-# (Optional) Install GitHub CLI
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-apt-get update && apt-get install -y gh
+# Install nvm and Node.js LTS
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+source ~/.bashrc
+nvm install --lts
 ```
 
 ## Getting Help

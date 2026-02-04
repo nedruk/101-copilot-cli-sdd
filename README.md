@@ -21,9 +21,12 @@ To try out the workshop without affecting your local environment, use Docker:
 
 2. **Start the container:**
    ```bash
+   # Set HOST_PROJECT_PATH to your project location (required if running inside a devcontainer)
+   # export HOST_PROJECT_PATH=/path/to/101-copilot-cli-sdd
+
    docker run -it \
      --name copilot-workshop \
-     -v "$(pwd)/tryout":/workspace \
+     -v "${HOST_PROJECT_PATH:-$(pwd)}/tryout":/workspace \
      -w /workspace \
      ubuntu:24.04 \
      bash
@@ -31,10 +34,17 @@ To try out the workshop without affecting your local environment, use Docker:
 
 3. **Inside the container**, install prerequisites:
    ```bash
-   apt-get update && apt-get install -y curl git jq
-   curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-   apt-get install -y nodejs
-   npm install -g @github/copilot
+   # Basic tools
+   apt-get update && apt-get install -y curl git jq gh
+
+   # Install uv (Python package manager)
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   source $HOME/.local/bin/env
+
+   # Install nvm and Node.js LTS
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+   source ~/.bashrc
+   nvm install --lts
    ```
 
 **Useful Docker commands:**
