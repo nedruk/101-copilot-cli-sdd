@@ -38,6 +38,14 @@ Copilot CLI supports multiple installation methods:
 | WinGet | `winget install GitHub.Copilot` | Windows users |
 | Dev Container | Built-in | Codespaces users |
 
+## Updating Copilot CLI
+
+> [!NOTE]
+> 💡 **Already have Copilot CLI installed?** To update to the latest version, simply run:
+> ```bash
+> copilot update
+> ```
+
 ## Hands-On Exercises
 
 ### Exercise 1: Install via npm (Recommended)
@@ -56,7 +64,7 @@ Copilot CLI supports multiple installation methods:
    ```bash
    # Install or update nvm
    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-   
+
    # Install Node.js v22
    nvm install 22
    nvm use 22
@@ -74,7 +82,7 @@ Copilot CLI supports multiple installation methods:
 
 **Expected Outcome:**
 ```
-@github/copilot version X.X.X
+GitHub Copilot CLI 0.0.402
 ```
 
 ### Exercise 2: Install via Homebrew (macOS/Linux)
@@ -127,7 +135,9 @@ Copilot CLI supports multiple installation methods:
    ```
 
 **Expected Outcome:**
-Installation completes with version displayed.
+```
+GitHub Copilot CLI 0.0.402.
+```
 
 ### Exercise 4: Authenticate with GitHub
 
@@ -148,7 +158,7 @@ Installation completes with version displayed.
 
 5. Return to your terminal. You should see the Copilot prompt:
    ```
-   > 
+   >
    ```
 
 **Expected Outcome:**
