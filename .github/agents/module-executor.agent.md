@@ -3,7 +3,7 @@ name: module-executor
 description: Executes a single workshop module inside Docker, validates commands, auto-fixes simple errors, and returns structured results. Invoked by workshop-runner for each module.
 tools:
   ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/readFile', 'edit/editFiles', 'web/fetch']
-infer: tru
+user-invokable: false
 ---
 
 <instructions>
