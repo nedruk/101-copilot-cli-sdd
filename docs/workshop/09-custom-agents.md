@@ -36,11 +36,12 @@ tools:                    # Optional: default is all tools
 ---
 
 [Markdown body with detailed instructions]
-```
+```yaml
+
 
 ### Agent Hierarchy
 
-```
+```text
 Enterprise agents (.github-private repo)
         ↓
 Organization agents (.github-private repo)
@@ -62,8 +63,6 @@ Copilot CLI includes specialized built-in agents:
 | **Code-review** | High signal-to-noise code reviews |
 
 ## Hands-On Exercises
-
-> ⚠️ **FEEDBACK**: Agent files are created in `.github/agents/`. The hierarchy and YAML frontmatter structure are well-defined. Testing agent behavior requires an authenticated session, but you can create the configuration files to set up the structure.
 
 ### Exercise 1: Create a Repository Agent
 

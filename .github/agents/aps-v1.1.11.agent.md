@@ -9,7 +9,7 @@ tools:
   - edit/editFiles
   - web/fetch
   - todo
-user-invokable: true
+user-invocable: true
 disable-model-invocation: true
 target: vscode
 ---

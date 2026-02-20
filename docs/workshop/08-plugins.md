@@ -20,7 +20,7 @@
 
 Plugins extend Copilot's capabilities beyond built-in features:
 
-```
+```text
 ┌─────────────────┐
 │   Copilot CLI   │
 ├─────────────────┤
@@ -219,7 +219,8 @@ Database query capabilities via Copilot.
 
 ### Exercise 5: Create a Simple Custom Plugin
 
-> ⚠️ **FEEDBACK**: The code snippet uses `require` (CommonJS) but doesn't include `module.exports` or type definition in `package.json`. This is fine as CommonJS is the default. The `npm install @modelcontextprotocol/sdk` command should complete successfully.
+> [!TIP]
+> The code snippet uses `require` (CommonJS) but doesn't include `module.exports` or type definition in `package.json`. This is fine as CommonJS is the default. The `npm install @modelcontextprotocol/sdk` command should complete successfully.
 
 **Goal:** Build a basic plugin for your workflow.
 

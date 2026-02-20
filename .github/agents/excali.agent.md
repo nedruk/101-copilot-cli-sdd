@@ -7,7 +7,7 @@ tools:
   - read/readFile
   - edit/createFile
   - edit/createDirectory
-user-invokable: true
+user-invocable: true
 disable-model-invocation: false
 target: vscode
 ---

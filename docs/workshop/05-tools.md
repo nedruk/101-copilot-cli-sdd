@@ -32,7 +32,7 @@ Copilot CLI includes several built-in tools:
 
 Every potentially destructive action requires approval:
 
-```
+```text
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
 │ Copilot     │────▶│ Permission   │────▶│ Execute     │
 │ wants to    │     │ Prompt       │     │ Action      │
@@ -141,8 +141,6 @@ You understand the difference between one-time and session-wide approval.
 Shell commands are approved individually by command name.
 
 ### Exercise 3: Using --allow-tool Flag
-
-> ⚠️ **FEEDBACK**: The `--allow-tool` and `--deny-tool` flags may not appear in `copilot --help` for all versions (e.g., version `0.0.400`). If these flags don't work, they may be from a newer version or preview build. Check your installed version and available flags with `copilot --help`.
 
 **Goal:** Pre-approve tools for programmatic mode.
 

@@ -20,7 +20,7 @@
 
 Context is everything Copilot "remembers" during a session:
 
-```
+```text
 ┌────────────────────────────────────────────────┐
 │                  Context Window                │
 ├────────────────────────────────────────────────┤
@@ -41,16 +41,24 @@ Context is everything Copilot "remembers" during a session:
 | Model | Approximate Limit |
 |-------|-------------------|
 | GPT-4 | ~128K tokens |
-| GPT-5 mini | ~128K tokens |
 | GPT-4.1 | ~128K tokens |
+| Claude Sonnet 4.6 | ~200K tokens |
+| ~~GPT-5 mini~~ | ~~128K tokens~~ (deprecated v0.0.412) |
+
+> [!NOTE]
+> Use `/model` to select a model and `/context` to see context window usage. Current models include:
+> - Claude Opus 4.6
+> - Gemini 3 Pro
+> - GPT-5.3-Codex
+> - GPT-5 mini
+>
+> Model availability may vary by Copilot subscription tier.
 
 ### Auto-Compaction
 
 When context reaches ~95% capacity, Copilot automatically compresses history to continue the session.
 
 ## Hands-On Exercises
-
-> ⚠️ **FEEDBACK**: Actual token usage and compaction behavior cannot be fully verified without a live authenticated session. The concepts described are consistent with standard LLM context window management.
 
 ### Exercise 1: Monitor Context Usage
 
