@@ -77,7 +77,7 @@ Slash commands are prefixed with `/` and provide quick access to CLI features wi
 | **Extensibility** | `/skills`, `/plugin`, `/agent` | Manage skills, plugins, and agents |
 | **Sharing** | `/share`, `/feedback` | Export sessions and submit feedback |
 | **Account** | `/login`, `/logout`, `/user` | Authentication and user management |
-| **System** | `/help`, `/exit`, `/quit`, `/init`, `/tasks`, `/lsp` | General utilities |
+| **System** | `/help`, `/exit`, `/quit`, `/init`, `/tasks`, `/lsp`, `/update`, `/changelog` | General utilities |
 
 #### Keyboard Shortcuts
 
@@ -86,16 +86,32 @@ In addition to slash commands, Copilot CLI supports keyboard shortcuts:
 | Shortcut | Action |
 |----------|--------|
 | `@` | Mention files — include file contents in context |
-| `!` | Execute a shell command directly (bypass Copilot) |
+| `!` | Execute a shell command directly (bypass Copilot; also the only way to access shell mode since v0.0.410) |
 | `Esc` | Cancel the current operation |
 | `ctrl+x → /` | Run a slash command |
 | `ctrl+c` | Cancel operation / clear input / exit |
-| `ctrl+d` | Shutdown |
+| `ctrl+d` | Shutdown / exit CLI on empty prompt (v0.0.410+) |
 | `ctrl+l` | Clear the screen |
+| `ctrl+n` | Navigate down (alternative to down arrow, v0.0.410+) |
+| `ctrl+p` | Navigate up (alternative to up arrow, v0.0.410+) |
 | `ctrl+o` | Expand recent timeline (when no input) |
 | `ctrl+e` | Expand all timeline (when no input) |
 | `ctrl+t` | Toggle model reasoning display |
+| `ctrl+y` | Edit plan in terminal editor (v0.0.412+) |
+| `ctrl+x → ctrl+e` | Edit prompt in terminal editor (v0.0.412+) |
+| `ctrl+z` | Suspend/resume CLI (Unix platforms only, v0.0.410+) |
 | `Shift+Tab` | Cycle through modes (suggest, normal, autopilot) |
+| `Shift+Enter` | Insert newline in prompt (requires kitty keyboard protocol, v0.0.410+) |
+| `Page Up` / `Page Down` | Scroll in alt-screen mode (v0.0.410+) |
+| `Double-click` | Select word in alt-screen mode (v0.0.412+) |
+| `Triple-click` | Select line in alt-screen mode (v0.0.412+) |
+
+> [!WARNING]
+> Some keyboard shortcuts require specific terminal capabilities:
+> - **Shift+Enter** for newlines requires terminals with kitty keyboard protocol support
+> - **Ctrl+Z** suspend/resume works on Unix platforms only
+> - **Page Up/Down**, **Double/Triple-click** require alt-screen mode support
+> - **Ctrl+Y** and **Ctrl+X Ctrl+E** require a terminal editor (set via `$EDITOR` or `$VISUAL`)
 
 #### Key Commands Not Covered in Other Modules
 
@@ -113,10 +129,13 @@ Some commands are covered in depth in later modules (`/mcp` in Module 6, `/skill
 | `/terminal-setup` | Configure terminal for multiline input support (shift+enter) |
 | `/lsp` | View configured Language Server Protocol servers |
 | `/user [show\|list\|switch]` | Manage GitHub user list (multi-account support) |
+| `/update` | View update instructions for the latest Copilot CLI version |
+| `/changelog` | View the changelog for recent Copilot CLI releases |
 
 ## Hands-On Exercises
 
-> ⚠️ **FEEDBACK**: These exercises require authentication. If you encounter errors like "not authenticated", ensure you've completed Module 1 Exercise 4, or set one of these environment variables for programmatic authentication: `GITHUB_TOKEN`, `GH_TOKEN`, or `COPILOT_GITHUB_TOKEN`.
+> [!NOTE]
+> **Authentication Required:** You must authenticate before running these exercises. Complete Module 1 (authentication setup) or set one of these environment variables: `GITHUB_TOKEN`, `GH_TOKEN`, or `COPILOT_GITHUB_TOKEN`.
 
 ### Exercise 1: Discovering Slash Commands
 
@@ -268,7 +287,8 @@ You can bootstrap Copilot configuration with `/init`, rename sessions, and confi
    Create a Python script named `hello.py` that prints "Hello, Copilot!"
    ```
 
-   > ⚠️ **FEEDBACK**: Specifying the exact filename in prompts ensures consistent results across workshop participants. Without it, Copilot may generate different filenames each time (e.g., `hello_copilot.py`, `hello_python.py`).
+   > [!TIP]
+   > Specifying the exact filename in prompts ensures consistent results across workshop participants. Without it, Copilot may generate different filenames each time (e.g., `hello_copilot.py`, `hello_python.py`).
 
 4. When prompted to approve the file write, select **Yes**.
 
@@ -315,7 +335,8 @@ A Python script evolves through multiple iterations with your guidance.
    Display the contents of hello.py using the cat command
    ```
 
-   > ⚠️ **FEEDBACK**: Avoid prompts that reference a specific number of lines (e.g., "first 10 lines") for short files — Copilot may reason about the file length instead of running the expected command.
+   > [!TIP]
+   > Avoid prompts that reference a specific number of lines (e.g., "first 10 lines") for short files — Copilot may reason about the file length instead of running the expected command.
 
 6. Copilot asks for shell permission again (since you only approved once).
 
@@ -363,7 +384,8 @@ You understand the difference between one-time and session-wide tool approval.
    cat README.md | copilot -p "Explain what this file contains"
    ```
 
-   > ⚠️ **FEEDBACK**: When piping content to Copilot, use prompts that reference "this content" or "this file" rather than "this output" to avoid Copilot responding with "I don't see any output to explain."
+   > [!TIP]
+   > When piping content to Copilot, use prompts that reference "this content" or "this file" rather than "this output" to avoid Copilot responding with "I don't see any output to explain."
 
 **Expected Outcome:**
 Commands execute and exit without entering interactive mode.

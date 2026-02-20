@@ -17,6 +17,11 @@ The following issues have been addressed with inline `⚠️ **FEEDBACK**` notes
 - ✅ Module 7: `/skill list` command availability
 - ✅ Module 12: `COPILOT_TOKEN` vs standard env vars clarification
 - ✅ Module 12: `--available-tools`/`--excluded-tools` flag consistency
+- ✅ Module 12: Autopilot mode section (v0.0.411 feature) with feedback callout
+- ✅ Module 12: Fleet command section (v0.0.411-v0.0.412 features) with feedback callout
+- ✅ Module 12: `--bash-env` flag documentation (v0.0.412 feature) with feedback callout
+- ✅ Module 12: LSP timeout configuration via `lsp.json` (v0.0.412 feature) with feedback callout
+- ✅ Module 12: Shell mode access change documentation (v0.0.410 change)
 
 ## Open Items
 
@@ -33,6 +38,15 @@ None - all identified issues have been addressed.
 - ✅ Module 2 Ex5: Replaced "first 10 lines" prompt with explicit `cat` command to avoid Copilot confusion
 - ✅ Module 2 Ex6: Fixed piped input prompt wording ("Explain what this file contains" vs "Explain this output")
 - ✅ Module 2: Added comprehensive "Slash Commands" section covering all 30+ `/command` features, keyboard shortcuts, command categories, and 3 new exercises (`/plan`, `/review`, `/diff`, `/init`, `/rename`, `/tasks`, `/theme`, `/terminal-setup`, `/lsp`, `/user`). Module renamed to "Operating Modes & Commands" with updated duration (30 min).
+- ✅ **Module 12 Update (v0.0.410-v0.0.412)**: Added 4 new exercises covering:
+  - **Exercise 4**: Autopilot Mode (v0.0.411) - autonomous multi-step task execution
+  - **Exercise 5**: Fleet Command (v0.0.411-v0.0.412) - parallel sub-agents with orchestrator validation and parallel dispatch
+  - **Exercise 6**: Advanced Shell Configuration (v0.0.410, v0.0.412) - `--bash-env` flag and shell mode access changes
+  - **Exercise 7**: LSP Configuration (v0.0.412) - `lsp.json` for language server timeout control
+  - Updated configuration reference tables with version information
+  - Renumbered remaining exercises (8-11)
+  - Updated workshop duration from 20min to 30min
+  - Updated index to reflect new features and learning objectives
 
 ## Summary
 

@@ -1,6 +1,6 @@
 ---
 name: workshop-content-manager
-description: "Add, update, or remove content from Copilot CLI workshop modules with source validation."
+description: "Add, update, remove, or upgrade content from Copilot CLI workshop modules with source validation and version-diff analysis."
 tools:
   - search/codebase
   - search/fileSearch
@@ -12,7 +12,7 @@ tools:
   - web/fetch
   - web/githubRepo
   - todo
-user-invokable: true
+user-invocable: true
 disable-model-invocation: false
 target: vscode
 ---
@@ -32,6 +32,11 @@ You MUST use todo to track multi-step content changes.
 You MUST NOT remove existing content without explicit user confirmation.
 You MUST use execute/runInTerminal with `gh release` commands as a fallback when web/fetch is unavailable.
 You MUST NOT add content that contradicts official documentation.
+You MUST support "upgrade" requests by fetching changelogs between the current workshop version and a user-specified target version.
+You MUST parse each intermediate release's changelog to extract new features, breaking changes, and deprecations.
+You MUST present discovered version-diff features to the user and wait for explicit selection before generating content.
+You MUST use execute/runInTerminal with `gh release list` and `gh release view` to discover and fetch changelogs.
+You MAY fall back to web/fetch against the releases URL when terminal commands are unavailable.
 </instructions>
 
 <constants>
@@ -130,6 +135,47 @@ WHERE:
 - <REFERENCES> is MultilineList.
 </format>
 
+<format id="VERSION_DIFF" name="Version Diff Report" purpose="Present new features between two versions for user selection.">
+# Version Diff: <FROM_VERSION> → <TO_VERSION>
+
+## New Features
+<FEATURES>
+
+## Breaking Changes
+<BREAKING>
+
+## Deprecations
+<DEPRECATIONS>
+
+**Select features to include in workshop content (comma-separated numbers), or reply "all" / "none".**
+WHERE:
+- <FROM_VERSION> is String matching pattern [0-9]+\.[0-9]+\.[0-9]+(-[0-9]+)?.
+- <TO_VERSION> is String matching pattern [0-9]+\.[0-9]+\.[0-9]+(-[0-9]+)?.
+- <FEATURES> is MultilineNumberedList.
+- <BREAKING> is MultilineList; "None" if empty.
+- <DEPRECATIONS> is MultilineList; "None" if empty.
+</format>
+
+<format id="UPGRADE_RESULT" name="Upgrade Content Result" purpose="Summary of content changes from a version upgrade.">
+# Upgrade Complete: <FROM_VERSION> → <TO_VERSION>
+
+**Features Added:** <FEATURE_COUNT>
+**Modules Modified:** <MODULE_LIST>
+
+## Changes Applied
+<CHANGES_SUMMARY>
+
+## Source References
+<REFERENCES>
+WHERE:
+- <FROM_VERSION> is String.
+- <TO_VERSION> is String.
+- <FEATURE_COUNT> is Integer.
+- <MODULE_LIST> is String.
+- <CHANGES_SUMMARY> is MultilineList.
+- <REFERENCES> is MultilineList.
+</format>
+
 <format id="ERROR" name="Format Error" purpose="Emit a single-line reason when a requested format cannot be produced.">
 AG-036 FormatContractViolation: <ONE_LINE_REASON>
 WHERE:
@@ -144,6 +190,9 @@ ACTION: ""
 TARGET_MODULE: ""
 RESEARCH_COMPLETE: false
 CHANGES_VALIDATED: false
+CURRENT_VERSION: ""
+TARGET_VERSION: ""
+SELECTED_FEATURES: []
 </runtime>
 
 <triggers>
@@ -159,8 +208,16 @@ IF ACTION = "add" OR ACTION = "update":
   RUN `research`
   RUN `validate`
   RUN `apply_changes`
+  RETURN: format="CHANGE_RESULT"
 IF ACTION = "remove":
   RUN `confirm_removal`
+  RETURN: format="CHANGE_RESULT"
+IF ACTION = "upgrade":
+  RUN `upgrade_diff`
+  RETURN: format="VERSION_DIFF"
+IF ACTION = "upgrade_apply":
+  RUN `upgrade_apply`
+  RETURN: format="UPGRADE_RESULT"
 RETURN: format="CHANGE_RESULT"
 </process>
 
@@ -199,12 +256,43 @@ SET CONFIRMED := <USER_RESPONSE> (from "Agent Inference")
 IF CONFIRMED = true:
   USE `edit/editFiles` where: changes=removal, file=MODULES_DIR + "/" + MODULE_MAP[TARGET_MODULE]
 </process>
+
+<process id="upgrade_diff" name="Fetch Version Diff">
+USE `todo` where: items=["Identify current and target versions", "List releases between versions", "Fetch changelogs", "Extract new features", "Present diff to user"]
+SET CURRENT_VERSION := <VERSION> (from "Agent Inference" using USER_REQUEST)
+SET TARGET_VERSION := <VERSION> (from "Agent Inference" using USER_REQUEST)
+USE `execute/runInTerminal` where: command="gh release list --repo github/copilot-cli --limit 100 --json tagName,publishedAt --order desc"
+USE `execute/getTerminalOutput`
+CAPTURE RELEASE_LIST from terminal output
+SET VERSIONS_BETWEEN := <LIST> (from "Agent Inference" using RELEASE_LIST, CURRENT_VERSION, TARGET_VERSION)
+FOREACH version IN VERSIONS_BETWEEN:
+  USE `execute/runInTerminal` where: command="gh release view " + version + " --repo github/copilot-cli --json body --jq .body"
+  USE `execute/getTerminalOutput`
+  CAPTURE changelog from terminal output
+SET VERSION_FEATURES := <FEATURES> (from "Agent Inference" using all changelogs, current workshop content)
+USE `todo` where: complete="Fetch changelogs"
+</process>
+
+<process id="upgrade_apply" name="Apply Selected Upgrade Features">
+USE `todo` where: items=["Map features to modules", "Generate content for selected features", "Apply changes", "Update feedback file"]
+SET SELECTED_FEATURES := <SELECTION> (from "Agent Inference" using USER_REQUEST)
+FOREACH feature IN SELECTED_FEATURES:
+  SET TARGET_MODULE := <MODULE_ID> (from "Agent Inference" using feature, MODULE_MAP)
+  RUN `research`
+  RUN `validate`
+  RUN `apply_changes`
+USE `read/readFile` where: filePath=FEEDBACK_FILE
+USE `edit/editFiles` where: changes=upgrade_notes, file=FEEDBACK_FILE
+USE `todo` where: complete="Apply changes"
+</process>
 </processes>
 
 <input>
-USER_REQUEST describes the content change: what to add, update, or remove, and which module(s) to target.
+USER_REQUEST describes the content change: what to add, update, remove, or upgrade, and which module(s) to target.
 Examples:
 - "Add a new exercise about --yolo mode to module 05"
 - "Update the MCP server examples in module 06 with the latest syntax"
 - "Remove the deprecated --share flag references from module 03"
+- "Upgrade from version 0.0.412-1 to latest — check changelogs for new features"
+- "What changed between version 0.0.400 and 0.0.412-1?"
 </input>

@@ -1,6 +1,6 @@
 # GitHub Copilot CLI Workshop
 
-> **Tested against:** GitHub Copilot CLI **v0.0.409**. Check [releases](https://github.com/github/copilot-cli/releases) for newer versions — some features may change or new ones may be added.
+> **Tested against:** GitHub Copilot CLI **v0.0.412**. Check [releases](https://github.com/github/copilot-cli/releases) for newer versions — some features may change or new ones may be added.
 
 Welcome to this hands-on workshop for mastering GitHub Copilot CLI! This workshop will take you from installation to advanced automation techniques.
 
@@ -26,6 +26,8 @@ By the end of this workshop, you will be able to:
 - Build custom agents for specialized workflows
 - Set up hooks for lifecycle automation
 - Manage context effectively with `/context` and `/compact`
+- Use autopilot mode for autonomous task execution
+- Leverage fleet command for parallel multi-agent workflows
 
 ## Workshop Modules
 
@@ -42,9 +44,9 @@ By the end of this workshop, you will be able to:
 | 09 | [Custom Agents](09-custom-agents.md) | 25 min | Build specialized agents and subagents |
 | 10 | [Hooks](10-hooks.md) | 20 min | Lifecycle hooks and automation |
 | 11 | [Context Management](11-context.md) | 15 min | `/context`, `/compact`, token optimization |
-| 12 | [Advanced Topics](12-advanced.md) | 20 min | Environment variables, CI/CD, tips |
+| 12 | [Advanced Topics](12-advanced.md) | 30 min | Autopilot, Fleet, environment, CI/CD, LSP config, tips |
 
-**Total estimated time: ~4 hours**
+**Total estimated time: ~4.25 hours**
 
 ## Workshop Flow
 

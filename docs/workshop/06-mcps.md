@@ -33,6 +33,23 @@ Model Context Protocol (MCP) is an open standard that extends AI capabilities:
                     └─────────────┘
 ```
 
+### Debugging MCP Servers
+
+As of v0.0.410, MCP server errors now appear in the timeline view, making it easier to diagnose connection and configuration issues:
+
+```bash
+copilot
+```
+
+In the session, use `/timeline` to view the event history. MCP server errors will be displayed with details about:
+- Server startup failures
+- Connection errors
+- Tool invocation errors
+- Configuration issues
+
+> [!WARNING]
+> MCP error visibility in the timeline significantly improves the debugging experience when working with custom MCP servers, as errors are no longer silently ignored.
+
 ### Server Types
 
 | Type | Location | Use Case |
@@ -84,7 +101,8 @@ MCP servers are configured in:
 **Expected Outcome:**
 Copilot can access GitHub resources through the built-in MCP server.
 
-> ⚠️ **FEEDBACK**: Manually editing `~/.copilot/mcp-config.json` is straightforward. The command structure for MCP config follows the standard MCP specification. Verify the JSON syntax is valid before restarting Copilot.
+> [!TIP]
+> Manually editing `~/.copilot/mcp-config.json` is straightforward. The command structure for MCP config follows the standard MCP specification. Verify the JSON syntax is valid before restarting Copilot.
 
 ### Exercise 2: Configure a Remote MCP Server
 
@@ -204,7 +222,7 @@ Local MCP server runs and provides additional capabilities.
    npm install -g @modelcontextprotocol/server-filesystem
    ```
 
-2. Update MCP config with directory restrictions:
+2. Update MCP config with directory restrictions (using tilde expansion):
    ```bash
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
@@ -217,26 +235,36 @@ Local MCP server runs and provides additional capabilities.
          "args": [
            "-y",
            "@modelcontextprotocol/server-filesystem",
-           "/home/user/projects"
-         ]
+           "~/projects"
+         ],
+         "cwd": "~/projects"
        }
      }
    }
    EOF
    ```
+   
+   Note: You can use `~` for home directory in both args and `cwd` (v0.0.410+).
 
-3. Restart Copilot:
+3. Restart Copilot (or use `/mcp reload` in v0.0.412+):
    ```bash
    copilot
    ```
 
-4. Test file operations through MCP:
+4. Check the timeline for any MCP server errors:
+   ```
+   /timeline
+   ```
+   
+   If there are configuration issues, they'll appear here (v0.0.410+).
+
+5. Test file operations through MCP:
    ```
    Using the filesystem server, list all TypeScript files in my projects
    ```
 
 **Expected Outcome:**
-MCP server provides structured file access with defined boundaries.
+MCP server provides structured file access with defined boundaries. Any startup errors are visible in the timeline.
 
 ### Exercise 5: MCP Server Management Commands
 
@@ -265,23 +293,30 @@ MCP server provides structured file access with defined boundaries.
    /mcp edit memory
    ```
 
-5. **Disable a server temporarily:**
+5. **Reload configuration without restarting** (v0.0.412+):
+   ```
+   /mcp reload
+   ```
+   
+   This is useful when you've edited `~/.copilot/mcp-config.json` directly or want to pick up changes without exiting your current session.
+
+6. **Disable a server temporarily:**
    ```
    /mcp disable memory
    ```
 
-6. **Re-enable it:**
+7. **Re-enable it:**
    ```
    /mcp enable memory
    ```
 
-7. **Delete a server:**
+8. **Delete a server:**
    ```
    /mcp delete memory
    ```
 
 **Expected Outcome:**
-You can manage MCP servers without editing config files.
+You can manage MCP servers without editing config files, and reload configuration changes instantly.
 
 ### Exercise 6: Using MCP Tools with Permissions
 
@@ -392,7 +427,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
       "env": {
         "API_KEY": "${ENV_VAR}"
       },
-      "cwd": "/optional/working/directory"
+      "cwd": "~/projects/my-server"
     }
   }
 }
@@ -419,6 +454,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
 | `/mcp delete NAME` | Remove a server |
 | `/mcp disable NAME` | Temporarily disable |
 | `/mcp enable NAME` | Re-enable a disabled server |
+| `/mcp reload` | Reload MCP configuration without restarting (v0.0.412+) |
 
 ## Summary
 
@@ -427,6 +463,9 @@ Additional MCP servers can be loaded per-session without modifying base config.
 - ✅ Local servers run on your machine for local resources
 - ✅ Remote servers connect to external services
 - ✅ `/mcp` commands manage servers without editing files
+- ✅ `/mcp reload` reloads configuration without restarting (v0.0.412+)
+- ✅ Tilde (`~`) expansion works in `cwd` paths (v0.0.410+)
+- ✅ MCP server errors appear in timeline for easier debugging (v0.0.410+)
 - ✅ `--additional-mcp-config` loads temporary servers
 
 ## Next Steps

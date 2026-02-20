@@ -7,7 +7,7 @@ tools:
   - read/readFile
   - edit/editFiles
   - web/fetch
-user-invokable: false
+user-invocable: false
 disable-model-invocation: false
 target: vscode
 ---

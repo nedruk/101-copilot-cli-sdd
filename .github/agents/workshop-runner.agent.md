@@ -8,7 +8,7 @@ tools:
   - edit/editFiles
   - todo
   - agent/runSubagent
-user-invokable: true
+user-invocable: true
 disable-model-invocation: false
 target: vscode
 ---

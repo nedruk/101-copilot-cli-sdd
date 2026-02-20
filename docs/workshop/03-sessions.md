@@ -38,7 +38,18 @@ Sessions are stored in your Copilot config directory:
 
 ### Exercise 1: Session Persistence
 
-> ⚠️ **FEEDBACK**: Session persistence behavior may be unclear. By default, each `copilot` invocation starts a **fresh session**. The expected outcome stating "Recent session context is preserved when quickly re-entering" may not match actual behavior. Use `--resume` (Exercise 2) to explicitly restore a previous session. Clarification is needed on whether auto-resume is a feature or if `--resume` is always required.
+> [!NOTE]
+> **How Session Persistence Works:**
+> - Each `copilot` invocation starts a **fresh session** by default
+> - To restore a previous session, use `/resume` slash command or `--resume` flag
+> - Key session commands available:
+>   - `/resume` - Switch to a different session (optionally specify session ID)
+>   - `/rename` - Rename the current session (alias for `/session rename`)
+>   - `/context` - Show context window token usage and visualization
+>   - `/usage` - Display session usage metrics and statistics
+>   - `/session` - Show session info and workspace summary (use subcommands for details)
+>   - `/compact` - Summarize conversation history to reduce context window usage
+>   - `/share` - Share session to markdown file or GitHub gist
 
 **Goal:** Understand how sessions persist between interactions.
 
@@ -309,8 +320,6 @@ You know when clearing context improves your workflow.
 You can run multiple focused sessions simultaneously.
 
 ### Exercise 7: Session Export and Sharing
-
-> ⚠️ **FEEDBACK**: The `--share` and `--share-gist` flags may not be available in all versions. These flags were not visible in `copilot --help` for version `0.0.400`. If these commands don't work, they may be from a newer version or preview build. Check `copilot --help` to verify available flags in your installation.
 
 **Goal:** Export session transcripts for documentation or sharing.
 

@@ -57,8 +57,6 @@ This is especially helpful when multiple instruction files interact and you need
 
 ## Hands-On Exercises
 
-> ⚠️ **FEEDBACK**: This module involves file creation and configuration. Since interactive verification requires authentication, you can create these files to simulate the setup even without a live authenticated session. The structure and concepts align with modern agentic workflows.
-
 ### Exercise 1: Create Repository Instructions
 
 **Goal:** Set up repository-wide coding standards.

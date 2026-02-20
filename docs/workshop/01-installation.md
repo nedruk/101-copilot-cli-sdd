@@ -143,16 +143,6 @@ GitHub Copilot CLI 0.0.402
 
 **Goal:** Connect Copilot CLI to your GitHub account.
 
-> ⚠️ **FEEDBACK**: This exercise uses interactive browser-based authentication. For non-interactive environments (CI/CD, automated agents, Docker containers), use environment variable authentication instead:
-> ```bash
-> export GITHUB_TOKEN="ghp_your_personal_access_token"
-> # or
-> export GH_TOKEN="ghp_your_personal_access_token"
-> # or
-> export COPILOT_GITHUB_TOKEN="ghp_your_personal_access_token"
-> ```
-> See [Module 12: Advanced Topics](12-advanced.md) for more details on programmatic authentication.
-
 **Steps:**
 
 1. Start Copilot CLI:
@@ -261,8 +251,6 @@ source ~/.bashrc
 3. Check that CLI access is enabled
 
 ### Authentication in Containers and CI/CD
-
-> ⚠️ **FEEDBACK**: Browser-based OAuth may not work in headless environments (Docker containers, CI/CD, remote servers). Use a Personal Access Token (PAT) instead:
 
 1. Create a fine-grained PAT at https://github.com/settings/personal-access-tokens/new
 2. Under "Permissions," add **"Copilot Requests"**
