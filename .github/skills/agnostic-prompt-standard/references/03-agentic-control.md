@@ -154,7 +154,7 @@ Error binding follows engine-defined schema; at minimum, engines MUST expose `er
 The following describes statement syntax at a human-readable level. The authoritative grammar is
 in **05 Grammar**.
 
-```text
+```
 RUN `process_id` [where: k1=V1, ...]
 
 USE `tool_name` [where: k1=V1, ...] [(atomic[, timeout_ms=NUM][, retry=NUM])]

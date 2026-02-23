@@ -32,7 +32,7 @@ agent to render. This ensures outputs are verifiable, stable, and machine-checka
 
 Tag syntax:
 
-```text
+```
 <format id="ID" [name="..."...] [purpose="..."]>
   …
 </format>

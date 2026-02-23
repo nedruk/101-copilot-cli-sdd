@@ -18,7 +18,7 @@
 
 ### Configuration Hierarchy
 
-```text
+```
 Environment Variables
         ↓
 XDG_CONFIG_HOME (~/.copilot)
@@ -370,7 +370,7 @@ Copilot autonomously completes multi-step tasks with minimal human intervention.
 
 4. **How fleet works:**
 
-   ```text
+   ```
    Your Prompt
         ↓
    Orchestrator Agent (Plans & Validates)
@@ -508,13 +508,13 @@ Complex tasks are completed faster through parallel sub-agent execution with qua
 
    **Old behavior (< v0.0.410):**
 
-   ```text
+   ```
    Shift+Tab: cycle through (chat) → (command) → (shell)
    ```
 
    **New behavior (≥ v0.0.410):**
 
-   ```text
+   ```
    Shift+Tab: cycle through (chat) ⟷ (command) only
    ! (exclamation): direct access to shell mode
    ```

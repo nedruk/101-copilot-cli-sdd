@@ -32,7 +32,7 @@ Copilot CLI includes several built-in tools:
 
 Every potentially destructive action requires approval:
 
-```text
+```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
 │ Copilot     │────▶│ Permission   │────▶│ Execute     │
 │ wants to    │     │ Prompt       │     │ Action      │
@@ -320,12 +320,12 @@ You can control directory access both persistently and per-session.
    ```bash
    #!/bin/bash
    set -e
-   
+
    PROJECT_DIR="${1:-.}"
-   
+
    echo "🔍 Analyzing project in: $PROJECT_DIR"
    echo "=================================="
-   
+
    # Safe analysis - read-only operations only
    copilot -p "Analyze the code quality and suggest improvements" \
      --allow-tool 'shell(find)' \
@@ -344,7 +344,7 @@ You can control directory access both persistently and per-session.
 2. Create a code review script:
    ```bash
    #!/bin/bash
-   
+
    # Review changes but don't modify anything
    copilot -p "Review the git diff and provide feedback" \
      --allow-tool 'shell(git diff)' \
