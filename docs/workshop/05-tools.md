@@ -100,8 +100,20 @@ Every potentially destructive action requires approval:
 
 10. No prompt this time - session approval persists.
 
+11. To reset all approved tools for the session, use:
+    ```
+    /reset-allowed-tools
+    ```
+
+12. Now request another file operation:
+    ```
+    Create test4.txt
+    ```
+
+13. Notice you're prompted again - the reset cleared all session approvals.
+
 **Expected Outcome:**
-You understand the difference between one-time and session-wide approval.
+You understand the difference between one-time and session-wide approval, and can reset session approvals when needed.
 
 ### Exercise 2: Shell Command Approval
 
@@ -407,10 +419,19 @@ Safe, repeatable automation with explicit permissions.
 | `--available-tools` | Allowlist specific tools |
 | `--excluded-tools` | Denylist specific tools |
 
+### Runtime Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/reset-allowed-tools` | Reset the list of tools approved during the session |
+| `/add-dir <path>` | Add a trusted directory for the session |
+| `/list-dirs` | View accessible directories |
+
 ## Summary
 
 - ✅ Copilot requires approval for file changes and command execution
 - ✅ One-time vs session-wide approval gives granular control
+- ✅ Use `/reset-allowed-tools` to clear session approvals
 - ✅ `--allow-tool` and `--deny-tool` enable automation
 - ✅ Deny rules take precedence over allow rules
 - ✅ `--yolo` enables full autonomy - use only in safe environments
