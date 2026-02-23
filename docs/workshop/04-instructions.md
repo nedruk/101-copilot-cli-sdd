@@ -120,7 +120,7 @@ Generated code follows your specified style (2-space indent, const usage, JSDoc 
 **Steps:**
 
 1. Create `AGENTS.md` in your project root:
-   ```bash
+   ````bash
    cat > AGENTS.md << 'EOF'
    # Agent Instructions
 
@@ -199,7 +199,7 @@ Generated code follows your specified style (2-space indent, const usage, JSDoc 
    }
    ```
    EOF
-   ```
+   ````
 
 2. Test the agent behavior:
    ```bash
@@ -488,12 +488,12 @@ Commit messages follow Conventional Commits format.
    ```
 
 3. **Provide code examples:**
-   ```markdown
+   ````markdown
    ## Preferred Error Pattern
    ```typescript
    throw new AppError('User not found', 404);
    ```
-   ```
+   ````
 
 4. **Document file structure:**
    ```markdown

@@ -47,6 +47,10 @@ None - all identified issues have been addressed.
   - Renumbered remaining exercises (8-11)
   - Updated workshop duration from 20min to 30min
   - Updated index to reflect new features and learning objectives
+- ✅ **Module 5**: Added `/reset-allowed-tools` slash command documentation (v0.0.412 feature)
+  - Added to Exercise 1 as steps 11-13 demonstrating session approval reset
+  - Created new "Runtime Slash Commands" reference section
+  - Updated Summary section to include the command
 
 ## Summary
 
