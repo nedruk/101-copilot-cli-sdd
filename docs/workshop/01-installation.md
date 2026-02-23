@@ -50,7 +50,7 @@ Copilot CLI supports multiple installation methods:
 
 ## Hands-On Exercises
 
-### Exercise 1: Install via Script (Quick Method) - Recommended option
+### Exercise 1a: Install via Script (Quick Method) - Recommended option
 
 **Goal:** Use the automated installation script.
 
@@ -79,10 +79,10 @@ Copilot CLI supports multiple installation methods:
 **Expected Outcome:**
 
 ```
-GitHub Copilot CLI 0.0.402.
+GitHub Copilot CLI 0.0.415
 ```
 
-### Exercise 1: Install via npm option
+### Exercise 1b: Install via npm option
 
 **Goal:** Install Copilot CLI globally using npm.
 
@@ -99,7 +99,7 @@ GitHub Copilot CLI 0.0.402.
 
    ```bash
    # Install or update nvm
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
    # Install Node.js v22
    nvm install 22
@@ -121,10 +121,10 @@ GitHub Copilot CLI 0.0.402.
 **Expected Outcome:**
 
 ```
-GitHub Copilot CLI 0.0.402
+GitHub Copilot CLI 0.0.415
 ```
 
-### Exercise 1: Install via Homebrew (macOS/Linux) option
+### Exercise 1c: Install via Homebrew (macOS/Linux) option
 
 **Goal:** Install using Homebrew package manager.
 
@@ -206,7 +206,7 @@ Interactive session starts with `>` prompt ready for input.
 **Expected Outcome:**
 Copilot correctly identifies your working directory and shows available commands.
 
-### Exercise 6: Windows Installation (WinGet)
+### Exercise 1d: Windows Installation (WinGet)
 
 **Goal:** Install Copilot CLI on Windows.
 

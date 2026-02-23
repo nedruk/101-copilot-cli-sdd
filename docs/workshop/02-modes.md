@@ -96,12 +96,17 @@ In addition to slash commands, Copilot CLI supports keyboard shortcuts:
 | `ctrl+n` | Navigate down (alternative to down arrow, v0.0.410+) |
 | `ctrl+p` | Navigate up (alternative to up arrow, v0.0.410+) |
 | `ctrl+o` | Expand recent timeline (when no input) |
-| `ctrl+e` | Expand all timeline (when no input) |
+| `ctrl+e` | Expand all timeline (when no input); or cycle to end of visual/logical line (v0.0.413+ overrides in edit mode) |
 | `ctrl+t` | Toggle model reasoning display |
+| `ctrl+a` | Cycle to beginning of visual line; repeated press goes to beginning of logical line (v0.0.413+) |
+| `ctrl+u` | Delete to beginning of logical line (v0.0.413+) |
 | `ctrl+y` | Edit plan in terminal editor (v0.0.412+) |
 | `ctrl+x → ctrl+e` | Edit prompt in terminal editor (v0.0.412+) |
 | `ctrl+z` | Suspend/resume CLI (Unix platforms only, v0.0.410+) |
-| `Shift+Tab` | Cycle through modes (suggest, normal, autopilot) |
+| `ctrl+insert` | Copy selected text in alt-screen mode (v0.0.413+) |
+| `Home` / `End` | Navigate within visual line (v0.0.415+) |
+| `ctrl+Home` / `ctrl+End` | Jump to text boundaries (v0.0.415+) |
+| `Shift+Tab` | Cycle through modes — (suggest) ⟷ (normal) since v0.0.410; use `!` for shell mode |
 | `Shift+Enter` | Insert newline in prompt (requires kitty keyboard protocol, v0.0.410+) |
 | `Page Up` / `Page Down` | Scroll in alt-screen mode (v0.0.410+) |
 | `Double-click` | Select word in alt-screen mode (v0.0.412+) |

@@ -25,6 +25,7 @@ Copilot CLI includes several built-in tools:
 | `shell` | Execute shell commands | ⚠️ High |
 | `write` | Create/modify files | ⚠️ High |
 | `read` | Read file contents | Low |
+| `show_file` | Present code/diffs to user in a prominent view (v0.0.415+) | Low |
 | `web_fetch` | Fetch web content | Medium |
 | `mcp` | Use MCP server tools | Varies |
 

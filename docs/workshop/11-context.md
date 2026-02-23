@@ -43,7 +43,9 @@ Context is everything Copilot "remembers" during a session:
 | GPT-4 | ~128K tokens |
 | GPT-4.1 | ~128K tokens |
 | Claude Sonnet 4.6 | ~200K tokens |
-| ~~GPT-5 mini~~ | ~~128K tokens~~ (deprecated v0.0.412) |
+
+> [!NOTE]
+> **Model auto-migration (v0.0.413):** Users previously on `claude-sonnet-4.5` are automatically migrated to the current default model on startup.
 
 > [!NOTE]
 > Use `/model` to select a model and `/context` to see context window usage. Current models include:
@@ -219,6 +221,7 @@ You can manage context efficiently.
    ```
 
    The Explore agent doesn't pollute main context.
+   As of v0.0.414, it can also use GitHub MCP tools when available.
 
 2. **Focus on specific areas:**
    ```

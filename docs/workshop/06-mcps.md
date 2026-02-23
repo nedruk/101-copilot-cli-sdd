@@ -82,6 +82,8 @@ MCP servers are configured in:
    /mcp show
    ```
 
+   > As of v0.0.415, `/mcp show` groups servers into **User**, **Workspace**, **Plugins**, and **Built-in** sections for easier navigation.
+
 3. The GitHub MCP server is pre-configured. Try using it:
    ```
    What are the open issues in this repository?
@@ -448,7 +450,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
 
 | Command | Description |
 |---------|-------------|
-| `/mcp show` | Display all MCP servers |
+| `/mcp show` | Display all MCP servers (grouped by source since v0.0.415) |
 | `/mcp add` | Add a new server interactively |
 | `/mcp edit NAME` | Edit an existing server |
 | `/mcp delete NAME` | Remove a server |
@@ -466,6 +468,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
 - ✅ `/mcp reload` reloads configuration without restarting (v0.0.412+)
 - ✅ Tilde (`~`) expansion works in `cwd` paths (v0.0.410+)
 - ✅ MCP server errors appear in timeline for easier debugging (v0.0.410+)
+- ✅ Giant single-line MCP tool results are now truncated correctly (v0.0.415)
 - ✅ `--additional-mcp-config` loads temporary servers
 
 ## Next Steps

@@ -1,6 +1,6 @@
 # GitHub Copilot CLI Workshop
 
-> **Tested against:** GitHub Copilot CLI **v0.0.412**. Check [releases](https://github.com/github/copilot-cli/releases) for newer versions — some features may change or new ones may be added.
+> **Tested against:** GitHub Copilot CLI **v0.0.415**. Check [releases](https://github.com/github/copilot-cli/releases) for newer versions — some features may change or new ones may be added.
 
 Welcome to this hands-on workshop for mastering GitHub Copilot CLI! This workshop will take you from installation to advanced automation techniques.
 

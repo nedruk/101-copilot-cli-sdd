@@ -620,6 +620,8 @@ license: MIT              # Optional: License identifier
 - ✅ Include examples and templates for better output quality
 - ✅ agentskills.io provides community-created skills
 - ✅ Copilot auto-selects skills based on your request
+- ✅ YAML array syntax for `allowed-tools` in skill files now loads correctly (v0.0.413 fix)
+- ✅ Skill files saved with UTF-8 BOM (common on Windows) now load correctly (v0.0.415 fix)
 
 ## Next Steps
 

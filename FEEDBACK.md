@@ -25,11 +25,18 @@ The following issues have been addressed with inline `⚠️ **FEEDBACK**` notes
 
 ## Open Items
 
-None - all identified issues have been addressed.
+### Warnings (non-blocking)
+
+1. **Module 01 Exercise 1d placement**: Exercise 1d (WinGet) appears after Exercises 2-3 in the file. Ideally all installation alternatives (1a-1d) should be grouped together before Exercise 2 (Authenticate). Consider reordering.
+2. **Module 02 `ctrl+e` dual function**: `ctrl+e` has two functions depending on context — "expand all timeline" (when no input) vs "cycle to end of line" (v0.0.413+ in edit mode). Merged into single row with contextual note. Users may still find this confusing.
+3. **Module 02 `Shift+Tab` mode names**: Module 02 uses "(suggest) ⟷ (normal)" while Module 12 uses "(chat) ⟷ (command)". Both describe the same behavior from v0.0.410+ but use different terminology. Consider standardizing.
+4. **Module 04 example links**: `llm.txt` exercise contains example links (`/docs/api.md`, `/docs/adr/`, `/CONTRIBUTING.md`) that point to non-existent files. These are intentionally example content but trigger false positives in automated link checkers.
+5. **Module 03 Exercise 7**: Uses `copilot --share` and `copilot --share-gist` CLI flags to export sessions. The in-session `/share` slash command (documented in Exercise 1 note) may be more intuitive for users already in a session.
+6. **Module 12**: Has `### Resources` subsection under the completion section instead of a top-level `## References` section. A `## References` section was added for structural consistency, but the `### Resources` subsection remains as well.
 
 ## Recent Changes
 
-- ✅ Version bump: Workshop updated from v0.0.405 to v0.0.409
+- ✅ Version bump: Workshop updated from v0.0.412 to v0.0.415
 - ✅ Module 4: Added `/instructions` command section (v0.0.407 feature) with feedback callout
 - ✅ Index: Added `/instructions` to slash commands quick reference table
 - ✅ README: Expanded SDD acronym, added Dev Container guidance, reframed install options as alternatives
@@ -51,6 +58,14 @@ None - all identified issues have been addressed.
   - Added to Exercise 1 as steps 11-13 demonstrating session approval reset
   - Created new "Runtime Slash Commands" reference section
   - Updated Summary section to include the command
+- ✅ **v0.0.415 validation pass** — fixes applied:
+  - Module 01: Updated stale version `0.0.402` → `0.0.415` in expected output (2 occurrences)
+  - Module 01: Fixed duplicate "Exercise 1" headings → renamed to Exercise 1a/1b/1c/1d
+  - Module 01: Fixed nvm URL version `v0.40.0` → `v0.40.1` (consistent with index)
+  - Module 02: Merged duplicate `ctrl+e` keyboard shortcut rows into single contextual entry
+  - Module 02: Updated `Shift+Tab` description to match v0.0.410+ behavior
+  - Module 12: Added `## References` section for structural consistency with other modules
+  - FEEDBACK.md: Updated version changelog from v0.0.409 → v0.0.415
 
 ## Summary
 
