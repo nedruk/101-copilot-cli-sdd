@@ -286,6 +286,10 @@ Full command-line control over Copilot behavior.
    /autopilot on
    ```
 
+   > **Permission elevation (v0.0.414):** When accepting a plan with autopilot, Copilot shows a permission elevation dialog to prevent auto-denied tool errors during autonomous execution.
+
+   > **Plan approval menu (v0.0.415):** Plan approval now shows model-curated actions with a recommended option highlighted, including an **autopilot+fleet** option for parallelizable work.
+
 4. **Example: Set up a new Express.js API:**
 
    ```bash
@@ -599,7 +603,7 @@ Shell sessions have consistent environment configuration, and you understand the
 
    **Default values (if not configured):**
    - initialization: 15000ms (15 seconds)
-   - request: 5000ms (5 seconds)
+   - request: 90000ms (90 seconds) — increased from 30s in v0.0.413
    - shutdown: 3000ms (3 seconds)
 
 4. **When to adjust LSP timeouts:**
@@ -1007,6 +1011,7 @@ Maximum performance from Copilot CLI using parallelization, autopilot, and fleet
 | `--additional-mcp-config` | Add MCP config | Base |
 | `--autopilot` | Enable autonomous multi-step execution | v0.0.411 |
 | `--bash-env` | Source BASH_ENV in shell sessions | v0.0.412 |
+| `--experimental` | Enable experimental features (alt-screen by default since v0.0.413) | v0.0.413 |
 
 ### Slash Commands
 
@@ -1062,7 +1067,10 @@ alias cop-resume='copilot --resume'
 - ✅ **Autopilot mode** enables autonomous multi-step task execution (v0.0.411)
 - ✅ **Fleet command** parallelizes complex tasks with orchestrator validation (v0.0.411-v0.0.412)
 - ✅ **--bash-env** sources custom environment for shell sessions (v0.0.412)
-- ✅ **LSP configuration** controls language server timeouts (v0.0.412)
+- ✅ **--experimental** enables alt-screen mode by default (v0.0.413)
+- ✅ **Configurable status line** displays dynamic session info via custom shell scripts (v0.0.413)
+- ✅ **Environment loading indicator** shows skills, MCPs, and plugins being loaded at startup (v0.0.415)
+- ✅ **LSP configuration** controls language server timeouts; default request timeout is 90s (v0.0.412-v0.0.413)
 - ✅ **Shell mode access** via `!` command (v0.0.410)
 - ✅ config.json and lsp.json persist preferences
 - ✅ Team standardization ensures consistency
@@ -1106,3 +1114,12 @@ Congratulations on completing the GitHub Copilot CLI Workshop!
 **Thank you for participating in this workshop!**
 
 → Return to [Workshop Index](00-index.md)
+
+## References
+
+- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+- [About Copilot CLI - GitHub Docs](https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli)
+- [Use Copilot CLI - GitHub Docs](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli)
+- [Copilot CLI Blog Posts](https://github.blog/tag/copilot/)
+- [GitHub Community Discussions](https://github.com/orgs/community/discussions)
+- [agentskills.io](https://agentskills.io/)

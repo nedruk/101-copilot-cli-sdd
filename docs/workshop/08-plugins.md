@@ -49,6 +49,7 @@ Plugins extend Copilot's capabilities beyond built-in features:
 2. **microsoft/work-iq-mcp** - Enterprise integrations
 3. **Community plugins** - Third-party extensions
 4. **Custom plugins** - Your own integrations
+5. **Remote sources** - GitHub repos and git URLs referenced in `marketplace.json` (v0.0.413+)
 
 ## Hands-On Exercises
 
@@ -478,6 +479,7 @@ You can find, evaluate, and contribute to the plugin ecosystem.
 - ✅ Community MCP servers add diverse capabilities
 - ✅ You can create custom plugins for specific needs
 - ✅ Always review plugins for security before installation
+- ✅ `/plugin install` and `/plugin marketplace add` now support local paths with spaces (v0.0.415 fix)
 
 ## Next Steps
 

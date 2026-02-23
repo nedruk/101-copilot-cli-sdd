@@ -30,13 +30,14 @@ Custom agents are specialized versions of Copilot with:
 ---
 name: agent-name
 description: What this agent does
-tools:                    # Optional: default is all tools
+model: claude-sonnet-4.6     # Optional: override AI model (v0.0.415+)
+tools:                        # Optional: default is all tools
   - shell
   - write
 ---
 
 [Markdown body with detailed instructions]
-```yaml
+```
 
 
 ### Agent Hierarchy
@@ -57,7 +58,7 @@ Copilot CLI includes specialized built-in agents:
 
 | Agent | Purpose |
 |-------|---------|
-| **Explore** | Fast codebase analysis without context clutter |
+| **Explore** | Fast codebase analysis without context clutter; can use GitHub MCP tools when available (v0.0.414+) |
 | **Task** | Run commands with smart output handling |
 | **Plan** | Create implementation plans |
 | **Code-review** | High signal-to-noise code reviews |
@@ -601,7 +602,8 @@ description: What this agent does  # Required, max 1024 chars
 ---
 name: agent-name
 description: Description
-tools:                       # Optional, defaults to all
+model: gpt-4.1               # Optional: specify AI model (v0.0.415+)
+tools:                        # Optional, defaults to all
   - shell
   - write
   - read
@@ -609,6 +611,10 @@ tools:                       # Optional, defaults to all
   - mcp-server-name
 ---
 ```
+
+> **Note (v0.0.415):** Unknown frontmatter fields now produce a warning instead of blocking agent load, making agents more forward-compatible.
+>
+> **Note (v0.0.415):** Agents are model-aware — when asked which model is powering them, they can respond accurately.
 
 ### Agent Locations
 
@@ -629,6 +635,8 @@ tools:                       # Optional, defaults to all
 - ✅ Custom agents provide specialized personas and expertise
 - ✅ Agents defined in `.github/agents/` with YAML frontmatter
 - ✅ Built-in agents (Explore, Task, Plan, Code-review) handle common tasks
+- ✅ Explore agent can use GitHub MCP tools when available (v0.0.414+)
+- ✅ Agent `model` field overrides the default AI model (v0.0.415+)
 - ✅ Tool restrictions limit what agents can do
 - ✅ Organization agents provide team-wide standards
 - ✅ Agents can delegate to other agents for complex workflows

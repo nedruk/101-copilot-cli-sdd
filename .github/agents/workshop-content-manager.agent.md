@@ -43,6 +43,7 @@ You MAY fall back to web/fetch against the releases URL when terminal commands a
 WORKSHOP_INDEX: "docs/workshop/00-index.md"
 FEEDBACK_FILE: "FEEDBACK.md"
 MODULES_DIR: "docs/workshop"
+COPILOT_INSTRUCTIONS: ".github/copilot-instructions.md"
 
 OFFICIAL_SOURCES: JSON<<
 {
@@ -274,7 +275,7 @@ USE `todo` where: complete="Fetch changelogs"
 </process>
 
 <process id="upgrade_apply" name="Apply Selected Upgrade Features">
-USE `todo` where: items=["Map features to modules", "Generate content for selected features", "Apply changes", "Update feedback file"]
+USE `todo` where: items=["Map features to modules", "Generate content for selected features", "Apply changes", "Update feedback file", "Update TESTED_VERSION constant"]
 SET SELECTED_FEATURES := <SELECTION> (from "Agent Inference" using USER_REQUEST)
 FOREACH feature IN SELECTED_FEATURES:
   SET TARGET_MODULE := <MODULE_ID> (from "Agent Inference" using feature, MODULE_MAP)
@@ -283,6 +284,8 @@ FOREACH feature IN SELECTED_FEATURES:
   RUN `apply_changes`
 USE `read/readFile` where: filePath=FEEDBACK_FILE
 USE `edit/editFiles` where: changes=upgrade_notes, file=FEEDBACK_FILE
+USE `read/readFile` where: filePath=COPILOT_INSTRUCTIONS
+USE `edit/editFiles` where: changes=update TESTED_VERSION to TARGET_VERSION, file=COPILOT_INSTRUCTIONS
 USE `todo` where: complete="Apply changes"
 </process>
 </processes>
