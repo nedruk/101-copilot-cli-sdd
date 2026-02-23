@@ -20,7 +20,7 @@
 
 Plugins extend Copilot's capabilities beyond built-in features:
 
-```text
+```
 ┌─────────────────┐
 │   Copilot CLI   │
 ├─────────────────┤
@@ -241,12 +241,12 @@ Database query capabilities via Copilot.
    ```bash
    cat > index.js << 'EOF'
    const { Server } = require('@modelcontextprotocol/sdk/server');
-   
+
    const server = new Server({
      name: 'my-tools',
      version: '1.0.0'
    });
-   
+
    // Add a simple tool
    server.addTool({
      name: 'get-timestamp',
@@ -273,7 +273,7 @@ Database query capabilities via Copilot.
        }
      }
    });
-   
+
    // Add a resource
    server.addResource({
      name: 'system-info',
@@ -284,7 +284,7 @@ Database query capabilities via Copilot.
        cwd: process.cwd()
      })
    });
-   
+
    server.start();
    EOF
    ```
@@ -328,10 +328,10 @@ Custom plugin provides new capabilities to Copilot.
    ```bash
    # Check the source
    npm view @package/name repository
-   
+
    # Review dependencies
    npm view @package/name dependencies
-   
+
    # Check for known vulnerabilities
    npm audit @package/name
    ```
@@ -397,10 +397,10 @@ You can evaluate and securely configure plugins.
    ```bash
    # Stars and activity
    gh repo view owner/plugin-repo
-   
+
    # Recent commits
    gh api repos/owner/plugin-repo/commits --jq '.[0:5] | .[].commit.message'
-   
+
    # Open issues
    gh issue list -R owner/plugin-repo
    ```

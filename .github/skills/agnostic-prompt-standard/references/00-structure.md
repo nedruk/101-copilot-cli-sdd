@@ -103,7 +103,7 @@ The `<processes>` block MUST contain one or more `<process>` tags.
 
 Tag syntax:
 
-```text
+```
 <process id="PROCESS_ID" [name="..."] [args="ARG: TYPE, ..."]>
   …
 </process>
@@ -111,7 +111,7 @@ Tag syntax:
 
 Example:
 
-```text
+```
 <process id="calc_tax" args="amount: Number, region: String">
   …
 </process>
@@ -131,7 +131,7 @@ Purpose: maps external events to the execution of a specific `process_id`.
 
 Trigger syntax:
 
-```text
+```
 <trigger event="EVENT_TYPE" [pattern="REGEX"] target="PROCESS_ID" />
 ```
 

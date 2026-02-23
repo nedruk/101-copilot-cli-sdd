@@ -20,7 +20,7 @@
 
 Hooks are custom scripts that execute at specific points during Copilot agent execution:
 
-```text
+```
 Session Start → User Prompt → Pre-Tool → Tool Execution → Post-Tool → Session End
      ↓              ↓            ↓             ↓              ↓            ↓
    Hook           Hook         Hook                        Hook         Hook
@@ -216,27 +216,27 @@ All prompts logged with timestamps.
 1. Create a permission control script:
    ```bash
    mkdir -p .github/hooks/scripts
-   
+
    cat > .github/hooks/scripts/check-tool.sh << 'EOF'
    #!/bin/bash
-   
+
    # Read input from stdin
    INPUT=$(cat)
-   
+
    # Parse tool information
    TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
    TOOL_ARGS=$(echo "$INPUT" | jq -r '.toolArgs')
-   
+
    # Log the tool request
    echo "[$(date -Iseconds)] TOOL_REQUEST: $TOOL_NAME" >> logs/copilot-audit.log
-   
+
    # Define blocked patterns
    BLOCKED_COMMANDS=("rm -rf" "sudo" "chmod 777" "> /dev/sda" "mkfs")
-   
+
    # Check if this is a shell command
    if [ "$TOOL_NAME" = "shell" ]; then
      COMMAND=$(echo "$TOOL_ARGS" | jq -r '.command // empty')
-     
+
      # Check against blocked patterns
      for BLOCKED in "${BLOCKED_COMMANDS[@]}"; do
        if [[ "$COMMAND" == *"$BLOCKED"* ]]; then
@@ -245,14 +245,14 @@ All prompts logged with timestamps.
        fi
      done
    fi
-   
+
    # Check for write operations to sensitive paths
    if [ "$TOOL_NAME" = "write" ] || [ "$TOOL_NAME" = "edit" ]; then
      FILE_PATH=$(echo "$TOOL_ARGS" | jq -r '.path // empty')
-     
+
      # Block writes to sensitive locations
      SENSITIVE_PATHS=("/etc" "/usr" "/bin" "/sbin" ".env" ".git/config" "package-lock.json")
-     
+
      for SENSITIVE in "${SENSITIVE_PATHS[@]}"; do
        if [[ "$FILE_PATH" == *"$SENSITIVE"* ]]; then
          echo "{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Writing to '$SENSITIVE' is not allowed by policy\"}"
@@ -260,11 +260,11 @@ All prompts logged with timestamps.
        fi
      done
    fi
-   
+
    # Allow all other operations (return nothing for default behavior)
    echo "{}"
    EOF
-   
+
    chmod +x .github/hooks/scripts/check-tool.sh
    ```
 
@@ -329,21 +329,21 @@ Dangerous commands are blocked by the preToolUse hook.
    ```bash
    cat > .github/hooks/scripts/log-tool-result.sh << 'EOF'
    #!/bin/bash
-   
+
    INPUT=$(cat)
-   
+
    TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
    SUCCESS=$(echo "$INPUT" | jq -r '.success')
    DURATION=$(echo "$INPUT" | jq -r '.durationMs')
-   
+
    echo "[$(date -Iseconds)] TOOL_COMPLETE: $TOOL_NAME success=$SUCCESS duration=${DURATION}ms" >> logs/copilot-audit.log
-   
+
    # Alert on failures
    if [ "$SUCCESS" = "false" ]; then
      echo "[$(date -Iseconds)] ALERT: Tool $TOOL_NAME failed!" >> logs/copilot-alerts.log
    fi
    EOF
-   
+
    chmod +x .github/hooks/scripts/log-tool-result.sh
    ```
 
@@ -400,22 +400,22 @@ All tool executions are logged with results.
    ```bash
    cat > .github/hooks/scripts/handle-error.sh << 'EOF'
    #!/bin/bash
-   
+
    INPUT=$(cat)
-   
+
    ERROR_TYPE=$(echo "$INPUT" | jq -r '.errorType')
    ERROR_MESSAGE=$(echo "$INPUT" | jq -r '.errorMessage')
    TIMESTAMP=$(date -Iseconds)
-   
+
    # Log the error
    echo "[$TIMESTAMP] ERROR: $ERROR_TYPE - $ERROR_MESSAGE" >> logs/copilot-errors.log
-   
+
    # Could also send to monitoring system, Slack, etc.
    # curl -X POST https://monitoring.example.com/api/errors \
    #   -H "Content-Type: application/json" \
    #   -d "{\"type\":\"$ERROR_TYPE\",\"message\":\"$ERROR_MESSAGE\"}"
    EOF
-   
+
    chmod +x .github/hooks/scripts/handle-error.sh
    ```
 
@@ -444,21 +444,21 @@ Errors are logged and can trigger alerts.
    ```bash
    cat > .github/hooks/scripts/restrict-paths.sh << 'EOF'
    #!/bin/bash
-   
+
    INPUT=$(cat)
    TOOL_NAME=$(echo "$INPUT" | jq -r '.toolName')
-   
+
    # Only check write operations
    if [ "$TOOL_NAME" != "write" ] && [ "$TOOL_NAME" != "edit" ]; then
      echo "{}"
      exit 0
    fi
-   
+
    FILE_PATH=$(echo "$INPUT" | jq -r '.toolArgs.path // empty')
-   
+
    # Allowed directories
    ALLOWED_DIRS=("src/" "test/" "tests/" "docs/")
-   
+
    ALLOWED=false
    for DIR in "${ALLOWED_DIRS[@]}"; do
      if [[ "$FILE_PATH" == $DIR* ]] || [[ "$FILE_PATH" == ./$DIR* ]]; then
@@ -466,15 +466,15 @@ Errors are logged and can trigger alerts.
        break
      fi
    done
-   
+
    if [ "$ALLOWED" = false ]; then
      echo "{\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"Can only edit files in src/, test/, tests/, or docs/ directories\"}"
      exit 0
    fi
-   
+
    echo "{}"
    EOF
-   
+
    chmod +x .github/hooks/scripts/restrict-paths.sh
    ```
 

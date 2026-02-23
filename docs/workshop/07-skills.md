@@ -35,7 +35,7 @@ Skills are specialized capabilities that:
 
 ### Skill Discovery Levels
 
-```text
+```
 Level 1: Discovery      → Copilot reads name/description (always)
 Level 2: Instructions   → Copilot loads SKILL.md body (when relevant)
 Level 3: Resources      → Copilot accesses supporting files (as needed)
@@ -194,65 +194,65 @@ API documentation generated following your skill's style guide.
 3. Add example templates:
    ```bash
    mkdir -p .github/skills/test-writer/examples
-   
+
    cat > .github/skills/test-writer/examples/jest.ts << 'EOF'
    import { describe, it, expect, beforeEach } from 'jest';
    import { MyService } from '../src/my-service';
-   
+
    describe('MyService', () => {
      let service: MyService;
-   
+
      beforeEach(() => {
        service = new MyService();
      });
-   
+
      describe('methodName', () => {
        it('should return expected value for valid input', () => {
          // Arrange
          const input = 'valid';
-   
+
          // Act
          const result = service.methodName(input);
-   
+
          // Assert
          expect(result).toBe('expected');
        });
-   
+
        it('should throw error for invalid input', () => {
          // Arrange
          const input = null;
-   
+
          // Act & Assert
          expect(() => service.methodName(input)).toThrow('Invalid input');
        });
      });
    });
    EOF
-   
+
    cat > .github/skills/test-writer/examples/pytest.py << 'EOF'
    import pytest
    from src.my_service import MyService
-   
-   
+
+
    class TestMyService:
        @pytest.fixture
        def service(self):
            return MyService()
-   
+
        def test_method_returns_expected_for_valid_input(self, service):
            # Arrange
            input_value = "valid"
-   
+
            # Act
            result = service.method_name(input_value)
-   
+
            # Assert
            assert result == "expected"
-   
+
        def test_method_raises_for_invalid_input(self, service):
            # Arrange
            input_value = None
-   
+
            # Act & Assert
            with pytest.raises(ValueError, match="Invalid input"):
                service.method_name(input_value)
@@ -302,9 +302,9 @@ Skill uses example files to generate framework-appropriate tests.
    Follow Conventional Commits:
    ```
    <type>(<scope>): <description>
-   
+
    [optional body]
-   
+
    [optional footer(s)]
    ```
 
@@ -346,7 +346,7 @@ Skill uses example files to generate framework-appropriate tests.
 3. Create a code review skill:
    ```bash
    mkdir -p ~/.copilot/skills/code-review
-   
+
    cat > ~/.copilot/skills/code-review/SKILL.md << 'EOF'
    ---
    name: code-review
@@ -377,16 +377,16 @@ Skill uses example files to generate framework-appropriate tests.
    - 💡 **Question** - Needs clarification
 
    ## Example Feedback
-   
+
    🔴 **Blocking**: SQL injection vulnerability
    ```javascript
    // Current (vulnerable)
    db.query(`SELECT * FROM users WHERE id = ${userId}`);
-   
+
    // Suggested (safe)
    db.query('SELECT * FROM users WHERE id = ?', [userId]);
    ```
-   
+
    🟡 **Suggestion**: Consider extracting to a helper function for reuse.
    EOF
    ```
@@ -488,7 +488,7 @@ Community skills enhance your Copilot capabilities.
    - [ ] Rollback plan documented
 
    ## Common Commands
-   
+
    ### Deploy to staging
    ```bash
    ./scripts/deploy.sh staging
@@ -504,14 +504,14 @@ Community skills enhance your Copilot capabilities.
 3. Add helper scripts:
    ```bash
    mkdir -p .github/skills/deploy/scripts
-   
+
    cat > .github/skills/deploy/scripts/deploy.sh << 'EOF'
    #!/bin/bash
    ENV=${1:-staging}
    echo "Deploying to $ENV..."
    # Add actual deployment logic
    EOF
-   
+
    chmod +x .github/skills/deploy/scripts/deploy.sh
    ```
 
@@ -573,7 +573,7 @@ Copilot selects appropriate skills based on your request.
 
 ### Required Files
 
-```text
+```
 .github/skills/
 └── skill-name/
     └── SKILL.md          # Required: Skill definition
@@ -581,7 +581,7 @@ Copilot selects appropriate skills based on your request.
 
 ### Optional Files
 
-```text
+```
 .github/skills/
 └── skill-name/
     ├── SKILL.md          # Required

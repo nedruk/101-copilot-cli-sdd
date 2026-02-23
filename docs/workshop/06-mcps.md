@@ -20,7 +20,7 @@
 
 Model Context Protocol (MCP) is an open standard that extends AI capabilities:
 
-```text
+```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
 │ Copilot CLI │────▶│ MCP Server  │────▶│ External    │
 │             │     │             │     │ Resources   │
@@ -243,7 +243,7 @@ Local MCP server runs and provides additional capabilities.
    }
    EOF
    ```
-   
+
    Note: You can use `~` for home directory in both args and `cwd` (v0.0.410+).
 
 3. Restart Copilot (or use `/mcp reload` in v0.0.412+):
@@ -255,7 +255,7 @@ Local MCP server runs and provides additional capabilities.
    ```
    /timeline
    ```
-   
+
    If there are configuration issues, they'll appear here (v0.0.410+).
 
 5. Test file operations through MCP:
@@ -297,7 +297,7 @@ MCP server provides structured file access with defined boundaries. Any startup 
    ```
    /mcp reload
    ```
-   
+
    This is useful when you've edited `~/.copilot/mcp-config.json` directly or want to pick up changes without exiting your current session.
 
 6. **Disable a server temporarily:**

@@ -78,7 +78,7 @@ Copilot CLI supports multiple installation methods:
 
 **Expected Outcome:**
 
-```text
+```
 GitHub Copilot CLI 0.0.402.
 ```
 
@@ -120,7 +120,7 @@ GitHub Copilot CLI 0.0.402.
 
 **Expected Outcome:**
 
-```text
+```
 GitHub Copilot CLI 0.0.402
 ```
 
@@ -150,7 +150,7 @@ GitHub Copilot CLI 0.0.402
 
 **Expected Outcome:**
 
-```text
+```
 @github/copilot version X.X.X
 ```
 
@@ -174,7 +174,7 @@ GitHub Copilot CLI 0.0.402
 
 5. Return to your terminal. You should see the Copilot prompt:
 
-   ```text
+   ```
    >
    ```
 
@@ -189,7 +189,7 @@ Interactive session starts with `>` prompt ready for input.
 
 1. In the interactive session, type:
 
-   ```text
+   ```
    What directory am I in?
    ```
 
@@ -230,7 +230,7 @@ Copilot correctly identifies your working directory and shows available commands
 
 **Expected Outcome:**
 
-```text
+```
 @github/copilot version X.X.X
 ```
 

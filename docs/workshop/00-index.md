@@ -50,7 +50,7 @@ By the end of this workshop, you will be able to:
 
 ## Workshop Flow
 
-```text
+```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │  Installation   │────▶│  Core Concepts  │────▶│    Advanced     │
 │   (Module 1)    │     │  (Modules 2-5)  │     │  (Modules 6-12) │

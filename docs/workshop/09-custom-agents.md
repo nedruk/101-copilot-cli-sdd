@@ -41,7 +41,7 @@ tools:                    # Optional: default is all tools
 
 ### Agent Hierarchy
 
-```text
+```
 Enterprise agents (.github-private repo)
         ↓
 Organization agents (.github-private repo)
@@ -113,10 +113,10 @@ Copilot CLI includes specialized built-in agents:
        it('should [expected behavior] when [condition]', () => {
          // Arrange
          const input = setupTestData();
-         
+
          // Act
          const result = component.methodName(input);
-         
+
          // Assert
          expect(result).toBe(expected);
        });
@@ -130,10 +130,10 @@ Copilot CLI includes specialized built-in agents:
        def test_method_should_behavior_when_condition(self):
            # Arrange
            input_data = setup_test_data()
-           
+
            # Act
            result = component.method_name(input_data)
-           
+
            # Assert
            assert result == expected
    ```
@@ -196,25 +196,25 @@ Agent creates comprehensive tests following your specifications.
    ### README.md Structure
    ```markdown
    # Project Name
-   
+
    Brief description (1-2 sentences)
-   
+
    ## Features
    - Feature 1
    - Feature 2
-   
+
    ## Installation
    Step-by-step instructions
-   
+
    ## Usage
    Code examples
-   
+
    ## Configuration
    Options and environment variables
-   
+
    ## Contributing
    How to contribute
-   
+
    ## License
    License information
    ```
@@ -222,29 +222,29 @@ Agent creates comprehensive tests following your specifications.
    ### API Documentation Format
    ```markdown
    ## Endpoint Name
-   
+
    `METHOD /path`
-   
+
    ### Description
    What this endpoint does.
-   
+
    ### Authentication
    Required auth method.
-   
+
    ### Parameters
    | Name | Type | Required | Description |
    |------|------|----------|-------------|
-   
+
    ### Request Body
    ```json
    { "example": "request" }
    ```
-   
+
    ### Response
    ```json
    { "example": "response" }
    ```
-   
+
    ### Errors
    | Code | Description |
    |------|-------------|
@@ -446,17 +446,17 @@ Agent performs analysis without modification capabilities.
    name: security-reviewer
    description: Reviews code for security compliance with company standards.
    ---
-   
+
    # Security Review Agent
-   
+
    You enforce [Company Name] security standards.
-   
+
    ## Required Checks
    - OWASP Top 10 compliance
    - Company security policy adherence
    - Data privacy regulations (GDPR, CCPA)
    - Secrets detection
-   
+
    [Organization-specific content]
    ```
 
@@ -496,26 +496,26 @@ You understand how to deploy organization-wide agents.
 
    1. **Analysis Phase**
       Ask @analyzer to review related code
-      
+
    2. **Implementation Phase**
       Work directly on code changes
-      
+
    3. **Testing Phase**
       Ask @test-agent to create tests
-      
+
    4. **Documentation Phase**
       Ask @docs-agent to update docs
 
    ## Example Delegation
-   
+
    When asked to implement a feature:
    ```
    First, let me have @analyzer review the existing code...
-   
+
    [After implementation]
-   
+
    Now @test-agent should write tests for this...
-   
+
    Finally, @docs-agent will update the documentation...
    ```
 
@@ -553,7 +553,7 @@ Complex workflows coordinated across multiple agents.
    ```
    /help
    ```
-   
+
    Look for your custom agents in the list.
 
 2. Test agent invocation directly:
