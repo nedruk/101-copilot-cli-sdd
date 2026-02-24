@@ -371,29 +371,25 @@ MCP server tools follow the same permission model as built-in tools.
 
 **Steps:**
 
-1. Create a temporary MCP config file:
+1. Create a temporary MCP config as JSON:
    ```bash
    cat > /tmp/temp-mcp.json << 'EOF'
    {
      "mcpServers": {
-       "brave-search": {
-         "command": "npx",
-         "args": [
-           "-y",
-           "@anthropic/mcp-server-brave-search"
-         ],
-         "env": {
-           "BRAVE_API_KEY": "${BRAVE_API_KEY}"
-         }
+       "microsoft-learn": {
+         "type": "http",
+         "url": "https://learn.microsoft.com/api/mcp"
        }
      }
    }
    EOF
    ```
 
-2. Start Copilot with the additional config:
+   > **Note:** The [Microsoft Learn MCP Server](https://github.com/microsoftdocs/mcp) is free and requires no API key. It provides tools for searching Microsoft docs, fetching documentation pages, and finding code samples.
+
+2. Start Copilot with the additional config (pass the JSON string, not the file path):
    ```bash
-   copilot --additional-mcp-config /tmp/temp-mcp.json
+   copilot --additional-mcp-config "$(cat /tmp/temp-mcp.json)"
    ```
 
 3. The temporary servers are available for this session only.
@@ -404,6 +400,11 @@ MCP server tools follow the same permission model as built-in tools.
    ```
 
 5. The base config + temporary config are merged.
+
+6. Test it:
+   ```
+   Search Microsoft Learn for how to create an Azure Container App with managed identity
+   ```
 
 **Expected Outcome:**
 Additional MCP servers can be loaded per-session without modifying base config.
