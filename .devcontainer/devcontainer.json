@@ -65,6 +65,7 @@
         // "UV_PROJECT_ENVIRONMENT": "/home/vscode/.venv",
         // "PYTHONPATH": "/workspaces/101-copilot-sdd/src:${PYTHONPATH}"
     // },
+    "postCreateCommand": "bash ./.devcontainer/post-create.sh",
     "remoteUser": "vscode",
     "hostRequirements": {
         "memory": "4gb"
