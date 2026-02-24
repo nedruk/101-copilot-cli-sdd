@@ -387,7 +387,7 @@ MCP server tools follow the same permission model as built-in tools.
 
    > **Note:** The [Microsoft Learn MCP Server](https://github.com/microsoftdocs/mcp) is free and requires no API key. It provides tools for searching Microsoft docs, fetching documentation pages, and finding code samples.
 
-2. Start Copilot with the additional config (pass the JSON string, not the file path):
+2. Start Copilot with the additional config (pass the JSON string, not the file path as `--additional-mcp-config` expects inline JSON):
    ```bash
    copilot --additional-mcp-config "$(cat /tmp/temp-mcp.json)"
    ```
