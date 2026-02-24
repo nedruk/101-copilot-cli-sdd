@@ -142,19 +142,20 @@ Copilot can access GitHub resources through the built-in MCP server.
    ```bash
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
-     "servers": {
+     "mcpServers": {
        "github": {
+         "type": "http",
          "url": "https://api.githubcopilot.com/mcp/",
-         "requestInit": {
-           "headers": {
-             "Authorization": "Bearer ${GITHUB_TOKEN}"
-           }
+         "headers": {
+           "Authorization": "Bearer ${GITHUB_TOKEN}"
          }
        }
      }
    }
    EOF
    ```
+
+   > **Note:** `${GITHUB_TOKEN}` resolves from your environment. In Codespaces it's auto-injected; locally it comes from `gh auth status` (the active token).
 
 **Expected Outcome:**
 Remote MCP server configured and accessible.
@@ -174,9 +175,13 @@ Remote MCP server configured and accessible.
    ```bash
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
-     "servers": {
+     "mcpServers": {
        "github": {
-         "url": "https://api.githubcopilot.com/mcp/"
+         "type": "http",
+         "url": "https://api.githubcopilot.com/mcp/",
+         "headers": {
+           "Authorization": "Bearer ${GITHUB_TOKEN}"
+         }
        },
        "memory": {
          "command": "npx",
@@ -228,9 +233,13 @@ Local MCP server runs and provides additional capabilities.
    ```bash
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
-     "servers": {
+     "mcpServers": {
        "github": {
-         "url": "https://api.githubcopilot.com/mcp/"
+         "type": "http",
+         "url": "https://api.githubcopilot.com/mcp/",
+         "headers": {
+           "Authorization": "Bearer ${GITHUB_TOKEN}"
+         }
        },
        "filesystem": {
          "command": "npx",
@@ -366,7 +375,7 @@ MCP server tools follow the same permission model as built-in tools.
    ```bash
    cat > /tmp/temp-mcp.json << 'EOF'
    {
-     "servers": {
+     "mcpServers": {
        "brave-search": {
          "command": "npx",
          "args": [
@@ -405,13 +414,12 @@ Additional MCP servers can be loaded per-session without modifying base config.
 
 ```json
 {
-  "servers": {
+  "mcpServers": {
     "server-name": {
+      "type": "http",
       "url": "https://example.com/mcp/",
-      "requestInit": {
-        "headers": {
-          "Authorization": "Bearer TOKEN"
-        }
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
       }
     }
   }
@@ -422,7 +430,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
 
 ```json
 {
-  "servers": {
+  "mcpServers": {
     "server-name": {
       "command": "npx",
       "args": ["-y", "@package/server-name"],
