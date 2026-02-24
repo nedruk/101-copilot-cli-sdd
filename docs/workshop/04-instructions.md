@@ -29,7 +29,7 @@ Copilot CLI reads instructions from multiple sources with this priority:
 6. Default behavior (lowest)
 ```
 
-*Note: `llm.txt` for copilot instructions is currently listed as an issue to be implemented. This file currently can be located within websites to allow models/LLM's to better consume and navigate the site.*
+*Note: `llm.txt` for copilot instructions is currently listed as an issue to be implemented. This file currently can be located within websites to allow models/LLM's to better consume and navigate the site. See [here](https://llmstxthub.com/) for examples*
 
 ### File Purposes
 
