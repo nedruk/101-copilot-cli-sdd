@@ -35,20 +35,16 @@ Model Context Protocol (MCP) is an open standard that extends AI capabilities:
 
 ### Debugging MCP Servers
 
-As of v0.0.410, MCP server errors now appear in the timeline view, making it easier to diagnose connection and configuration issues:
+As of v0.0.410, MCP server errors now surface directly in the session output, making it easier to diagnose connection and configuration issues. Errors are displayed inline when:
+- A server fails to start
+- A connection cannot be established
+- A tool invocation fails
+- Configuration is invalid
 
-```bash
-copilot
-```
-
-In the session, use `/timeline` to view the event history. MCP server errors will be displayed with details about:
-- Server startup failures
-- Connection errors
-- Tool invocation errors
-- Configuration issues
+Use `/mcp show` to check which servers are connected and their current status.
 
 > [!WARNING]
-> MCP error visibility in the timeline significantly improves the debugging experience when working with custom MCP servers, as errors are no longer silently ignored.
+> MCP error visibility significantly improves the debugging experience when working with custom MCP servers, as errors are no longer silently ignored.
 
 ### Server Types
 
@@ -108,7 +104,9 @@ Copilot can access GitHub resources through the built-in MCP server.
 
 ### Exercise 2: Configure a Remote MCP Server
 
-**Goal:** Add a remote MCP server with authentication.
+**Goal:** Add a remote MCP server (Exa search).
+
+[Exa](https://exa.ai) provides AI-powered web search, code search, and company research through a remote MCP server.
 
 **Steps:**
 
@@ -126,10 +124,9 @@ Copilot can access GitHub resources through the built-in MCP server.
    ```
 
 3. Use Tab to navigate between fields:
-   - **Name**: `github-api`
+   - **Name**: `exa`
    - **Type**: remote
-   - **URL**: `https://api.githubcopilot.com/mcp/`
-   - **Auth Header**: `Authorization: Bearer YOUR_PAT_HERE`
+   - **URL**: `https://mcp.exa.ai/mcp`
 
 4. Press `Ctrl+S` to save.
 
@@ -143,22 +140,24 @@ Copilot can access GitHub resources through the built-in MCP server.
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
      "mcpServers": {
-       "github": {
+       "exa": {
          "type": "http",
-         "url": "https://api.githubcopilot.com/mcp/",
-         "headers": {
-           "Authorization": "Bearer ${GITHUB_TOKEN}"
-         }
+         "url": "https://mcp.exa.ai/mcp"
        }
      }
    }
    EOF
    ```
 
-   > **Note:** `${GITHUB_TOKEN}` resolves from your environment. In Codespaces it's auto-injected; locally it comes from `gh auth status` (the active token).
+   > **Note:** Exa's public tools (web search, code search, company research) don't require authentication. Only the corporate/enterprise Exa tools require an API key or OAuth.
+
+7. Test the Exa search tools:
+   ```
+   Search the web for the latest GitHub Copilot CLI features
+   ```
 
 **Expected Outcome:**
-Remote MCP server configured and accessible.
+Remote Exa MCP server configured. Copilot can now perform web searches, code searches, and company research via Exa tools.
 
 ### Exercise 3: Add a Local MCP Server
 
@@ -176,12 +175,9 @@ Remote MCP server configured and accessible.
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
      "mcpServers": {
-       "github": {
+       "exa": {
          "type": "http",
-         "url": "https://api.githubcopilot.com/mcp/",
-         "headers": {
-           "Authorization": "Bearer ${GITHUB_TOKEN}"
-         }
+         "url": "https://mcp.exa.ai/mcp"
        },
        "memory": {
          "command": "npx",
@@ -229,17 +225,16 @@ Local MCP server runs and provides additional capabilities.
    npm install -g @modelcontextprotocol/server-filesystem
    ```
 
+   > **Note:** The `~/projects` directory must exist before the filesystem server can start. Create it first with `mkdir -p ~/projects` if needed.
+
 2. Update MCP config with directory restrictions (using tilde expansion):
    ```bash
    cat > ~/.copilot/mcp-config.json << 'EOF'
    {
      "mcpServers": {
-       "github": {
+       "exa": {
          "type": "http",
-         "url": "https://api.githubcopilot.com/mcp/",
-         "headers": {
-           "Authorization": "Bearer ${GITHUB_TOKEN}"
-         }
+         "url": "https://mcp.exa.ai/mcp"
        },
        "filesystem": {
          "command": "npx",
@@ -257,17 +252,18 @@ Local MCP server runs and provides additional capabilities.
 
    Note: You can use `~` for home directory in both args and `cwd` (v0.0.410+).
 
+
 3. Restart Copilot (or use `/mcp reload` in v0.0.412+):
    ```bash
    copilot
    ```
 
-4. Check the timeline for any MCP server errors:
+4. Check for any MCP server errors:
    ```
-   /timeline
+   /mcp show
    ```
 
-   If there are configuration issues, they'll appear here (v0.0.410+).
+   If there are configuration issues, server status will indicate errors here (v0.0.410+).
 
 5. Test file operations through MCP:
    ```
@@ -275,7 +271,7 @@ Local MCP server runs and provides additional capabilities.
    ```
 
 **Expected Outcome:**
-MCP server provides structured file access with defined boundaries. Any startup errors are visible in the timeline.
+MCP server provides structured file access with defined boundaries. Any startup errors are visible via `/mcp show`.
 
 ### Exercise 5: MCP Server Management Commands
 
@@ -451,6 +447,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
 | Memory | `@modelcontextprotocol/server-memory` | Persistent memory |
 | Filesystem | `@modelcontextprotocol/server-filesystem` | File operations |
 | GitHub | Built-in | GitHub integration |
+| Exa | `https://mcp.exa.ai/mcp` (remote) | Web search, code search, company research |
 | PostgreSQL | `@modelcontextprotocol/server-postgres` | Database queries |
 | Slack | `@modelcontextprotocol/server-slack` | Slack integration |
 | Brave Search | `@anthropic/mcp-server-brave-search` | Web search |
@@ -476,7 +473,7 @@ Additional MCP servers can be loaded per-session without modifying base config.
 - ✅ `/mcp` commands manage servers without editing files
 - ✅ `/mcp reload` reloads configuration without restarting (v0.0.412+)
 - ✅ Tilde (`~`) expansion works in `cwd` paths (v0.0.410+)
-- ✅ MCP server errors appear in timeline for easier debugging (v0.0.410+)
+- ✅ MCP server errors surface in session output for easier debugging (v0.0.410+)
 - ✅ Giant single-line MCP tool results are now truncated correctly (v0.0.415)
 - ✅ `--additional-mcp-config` loads temporary servers
 
